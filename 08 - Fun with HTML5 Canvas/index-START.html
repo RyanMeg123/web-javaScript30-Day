@@ -15,14 +15,14 @@
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     let isDrawing = false;
-    let lastY = 0;
     let lastX = 0;
+    let lastY = 0;
 
     ctx.lineWidth = 90;
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-    ctx.strokeStyle = "#foo";
-    ctx.fillStyle = '#foo'
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    ctx.strokeStyle = "#f00";
+    // ctx.fillStyle = "#f00";
 
     let hue = 0;
     let direction = true;
@@ -43,7 +43,8 @@
       }
 
       // 彩虹效果
-      ctx.strokeStyle = `hsl(${ hue },90%,50%)`;
+      // ctx.strokeStyle = `hsl(${ hue },90%,50%)`;
+      ctx.strokeStyle = `hsl(${ hue }, 90%, 50%)`;
       if (hue >= 360) hue = 0;
       hue++;
       // 水墨效果
@@ -64,21 +65,17 @@
       ctx.beginPath();
       ctx.moveTo(lastX, lastY);
       ctx.lineTo(x, y);
-      ctx.stroke()
+      ctx.stroke();
 
-      [lastX, lastY] = [x, y]
+      [lastX, lastY] = [x, y];
     }
     canvas.addEventListener('mousedown', (e) => {
       isDrawing = true;
       [lastX, lastY] = [e.offsetX, e.offsetY];
     });
-    canvas.addEventListener('mousemove', draw)
-    canvas.addEventListener('mouseup', () => {
-      isDrawing = false;
-    })
-    canvas.addEventListener('mouseout', () => {
-      isDrawing = false
-    })
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', () => isDrawing = false);
+    canvas.addEventListener('mouseout', () => isDrawing = false);
     canvas.addEventListener('touchmove', draw);
     canvas.addEventListener('touchstart', (e) => {
       isDrawing = true;
